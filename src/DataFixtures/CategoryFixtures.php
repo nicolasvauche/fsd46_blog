@@ -13,8 +13,9 @@ class CategoryFixtures extends Fixture implements OrderedFixtureInterface
     {
         $category = new Category();
         $category->setName('musique');
-
         $manager->persist($category);
+        $this->addReference('category', $category);
+
         $manager->flush();
     }
     public function getOrder()

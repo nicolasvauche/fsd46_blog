@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'layout/backoffice/header.html.twig' %}
+    {% include 'layout/backoffice/navigation.html.twig' %}
+    <main>
+        {% block main %}
+        
+        {% endblock %}
+    </main>
+    {% include 'layout/backoffice/footer.html.twig' %}
+{% endblock %}

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/categorie')]
 class CategoryController extends AbstractController
@@ -24,6 +25,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/nouvelle', name: 'app_category_new', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $category = new Category();
@@ -52,6 +54,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/modifier/{slug}', name: 'app_category_edit', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -70,6 +73,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
+    #[IsGranted("ROLE_ADMIN")]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->getString('_token'))) {

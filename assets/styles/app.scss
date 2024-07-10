@@ -1,5 +1,4 @@
-$bg_color:skyblue;
+@import "utils/variables", "utils/mixins";
+@import "layout/default";
 
-body {
-    background-color: $bg_color;
-}
+

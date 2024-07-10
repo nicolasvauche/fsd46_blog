@@ -1,8 +1,6 @@
 <nav>
-    {% if app.user %}
-        <span>{{ app.user.email }}</span>
-        <a href="{{ path('app_logout')}}">Déconnexion</a>
-    {% else %}
-        <a href="{{ path('app_login')}}">Connexion</a>
-    {% endif %}
+    <span>{{ app.user.email }}</span>
+    <a href="{{ path('app_logout')}}">Déconnexion</a>
+    <a href="{{ path('app_category_index')}}">Catégories</a>
+    <a href="{{ path('app_post_index')}}">Articles</a>
 </nav>

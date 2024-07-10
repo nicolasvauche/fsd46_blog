@@ -27,6 +27,14 @@ class AuthorFixtures extends Fixture implements OrderedFixtureInterface
         ->setRoles(["ROLE_AUTHOR"]);
         $manager->persist($author);
         $this->addReference('author', $author);
+
+        $author = new Author();
+        $author->setPseudo("Wonder Woman")
+            ->setEmail('author2@blog.com')
+            ->setPassword($this->hasher->hashPassword($author, "author"))
+            ->setRoles(["ROLE_AUTHOR"]);
+        $manager->persist($author);
+        $this->addReference('author2', $author);
         
         $manager->flush();
     }

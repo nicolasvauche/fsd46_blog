@@ -1,10 +1,22 @@
 <nav>
+    <a href="{{ path('app_home') }}">{% trans from 'menu' %}Accueil{% endtrans %}</a>
+    <a href="{{ path('app_category_index') }}">{% trans from 'menu' %}Catégories{% endtrans %}</a>
+    <a href="{{ path('app_post_index') }}">{% trans from 'menu' %}Articles{% endtrans %}</a>
+    |
     {% if app.user %}
         <span>{{ app.user.email }}</span>
-        <a href="{{ path('app_logout')}}">Déconnexion</a>
+        <a href="{{ path('app_logout') }}">{% trans from 'menu' %}Déconnexion{% endtrans %}</a>
     {% else %}
-        <a href="{{ path('app_login')}}">Connexion</a>
+        <a href="{{ path('app_login') }}">{% trans from 'menu' %}Connexion{% endtrans %}</a>
     {% endif %}
-    <a href="{{ path('app_category_index')}}">Catégories</a>
-    <a href="{{ path('app_post_index')}}">Articles</a>
+    |
+    {% if app.request.locale == 'en' %}
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale:'fr'})) }}">
+            Français
+        </a>
+    {% else %}
+        <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale:'en'})) }}">
+            English
+        </a>
+    {% endif %}
 </nav>

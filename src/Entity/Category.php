@@ -17,10 +17,12 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Gedmo\Slug(fields: ['name'])]
+    #[Gedmo\Translatable]
     private ?string $slug = null;
 
     /**
@@ -28,6 +30,9 @@ class Category
      */
     #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'category')]
     private Collection $posts;
+
+    #[Gedmo\Locale]
+    private $locale;
 
     public function __construct()
     {
@@ -73,7 +78,7 @@ class Category
 
     public function addPost(Post $post): static
     {
-        if (!$this->posts->contains($post)) {
+        if(!$this->posts->contains($post)) {
             $this->posts->add($post);
             $post->addCategory($this);
         }
@@ -83,10 +88,15 @@ class Category
 
     public function removePost(Post $post): static
     {
-        if ($this->posts->removeElement($post)) {
+        if($this->posts->removeElement($post)) {
             $post->removeCategory($this);
         }
 
         return $this;
+    }
+
+    public function setTranslatableLocale($locale): void
+    {
+        $this->locale = $locale;
     }
 }

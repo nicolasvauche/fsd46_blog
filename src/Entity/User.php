@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "discriminator", type: "string")]
-#[ORM\DiscriminatorMap(["author" => "App\Entity\Author"])]
+#[ORM\DiscriminatorMap(["author" => "App\Entity\Author", "admin" => "App\Entity\Admin", "member" => "App\Entity\Member"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

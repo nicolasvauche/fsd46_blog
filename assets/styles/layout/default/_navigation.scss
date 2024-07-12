@@ -1,0 +1,27 @@
+nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    @include respond(sm){
+        bottom: initial;
+        top: 0.5rem;
+        left: initial;
+        right: 0.5rem;
+        background: yellow;
+    }
+    @include respond(md){
+        bottom: initial;
+        top: 0.5rem;
+        left: initial;
+        right: 0.5rem;
+        background-color: white;
+    }
+
+    span, a {
+        padding: 0.5rem;
+        margin: 0 1rem;
+        color: black;
+    }
+}

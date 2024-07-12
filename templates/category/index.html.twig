@@ -1,37 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/default/index.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}{% trans %}Les Catégories{% endtrans %}{% endblock %}
 
-{% block body %}
-    <h1>Category index</h1>
+{% block main %}
+    <h1>{% trans %}Les Catégories{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>actions</th>
+                <th>{% trans %}Nom{% endtrans %}</th>
+                <th>{% trans %}Uri{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.slug }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'slug': category.slug}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'slug': category.slug}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.slug }}</td>
+                    <td>
+                        <a href="{{ path('app_category_show', {'slug': category.slug}) }}">{% trans %}Détail{% endtrans %}</a>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('app_category_edit', {'slug': category.slug}) }}">{% trans %}Modifier{% endtrans %}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">{% trans %}Aucun résultat{% endtrans %}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_category_new') }}">Create new</a>
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_category_new') }}">{% trans %}Créer{% endtrans %}</a>
+    {% endif %}
 {% endblock %}
